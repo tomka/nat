@@ -1,3 +1,11 @@
+knn <- if(requireNamespace('nabor', quietly = T)) {
+  nabor::knn
+} else if(requireNamespace('RANN', quietly = T)) {
+  RANN::nn2
+} else {
+  function(...) stop("You must have either nabor or RANN package installed!")
+}
+
 #' dotprops: Neurons as point clouds with tangent vectors (but no connectivity)
 #' @param x Object to be tested/converted
 #' @name dotprops
@@ -147,7 +155,6 @@ dotprops.neuron<-function(x, Labels=NULL, resample=NA, ...) {
 #'   always to use labels when incoming object has them and \code{FALSE} never 
 #'   to use labels.
 #' @param na.rm Whether to remove \code{NA} points (default FALSE)
-#' @importFrom nabor knn
 #' @references The dotprops format is essentially identical to that developed in:
 #' 
 #' Masse N.Y., Cachero S., Ostrovsky A., and Jefferis G.S.X.E. (2012). 
@@ -454,7 +461,6 @@ prune.neuronlist<-function(x, target, ...){
 #' @param keep Whether to keep points in x that are near or far from the target
 #' @param return.indices Whether to return the indices that pass the test rather
 #'   than the 3D object/points (default \code{FALSE})
-#' @importFrom nabor knn
 prune.default<-function(x, target, maxdist, keep=c("near","far"), 
                         return.indices=FALSE, ...){
   keep=match.arg(keep, c("near", "far"))

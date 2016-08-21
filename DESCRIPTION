@@ -21,7 +21,6 @@ Depends:
     R (>= 2.15.1),
     rgl
 Imports:
-    nabor,
     igraph (>= 0.7.1),
     methods,
     filehash,
@@ -30,6 +29,8 @@ Imports:
     plyr,
     yaml
 Suggests:
+    nabor,
+    RANN,
     Rvcg,
     testthat,
     httr,
